@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Main from "./components/main/Main";
+import Header from "./components/header/Header";
+import { useState, useEffect } from "react";
 function App() {
+  const [user, setUser] = useState("");
+  const getData = async () => {
+    try {
+      const res = await fetch("https://randomuser.me/api/");
+      const data = await res.json();
+      setUser(data.results[0]);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header user={user} />
+      <Main {...user} getData={getData} />
     </div>
   );
 }
