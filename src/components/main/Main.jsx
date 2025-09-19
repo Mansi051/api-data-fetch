@@ -31,7 +31,9 @@ const Main = ({
           <p>{new Date(registered?.date).toLocaleDateString("en-gb")}</p>
         </div>
       </div>
-      <button onClick={getData}>Get Data</button>
+      <button className="getBtn" onClick={getData}>
+        Get Data
+      </button>
     </div>
   );
 };
